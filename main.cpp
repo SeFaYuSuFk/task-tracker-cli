@@ -1,34 +1,72 @@
 #include <iostream>
+#include <vector>
+#include <string>
 
 using namespace std;
+
+vector<string> gorevler;
+
+void gorevEkle()
+{
+	string yeniGorev;
+	cout << "Gorev ismi\n";
+	cin >> yeniGorev;
+
+
+	gorevler.push_back(yeniGorev);
+	cout << "Gorev basariyla eklendi.\n";
+
+
+}
+
+void gorevListele()
+{
+	cout << "Gorevlerimiz\n";
+
+	if (gorevler.empty())
+	{
+		cout << "Liste suan bos. Lutfen yeni gorev ekleyin.\n";
+	}
+
+	else
+	{
+		for (int i = 0; i < gorevler.size(); i++)
+		{
+			cout << i + 1 << " " << gorevler[i] << endl;
+		}
+	}
+
+
+}
+
 
 int main()
 {
 	int secim;
 
-	do 
+	do
 	{
-		cout << "== Gorev Takip Programi ==\n";
-		cout << "Gorev Ekleme.\n";
-		cout << "Gorev Listeleme.\n";
-		cout << "Programdan cikis yapiliyor...\n";
-		cout << "Lutfen bir secim yapiniz:\n";
+		cout << " ==Gorev Takip Programi==\n";
+		cout << " 1. Gorev Ekle\n";
+		cout << " 2. Gorev Listeleme\n";
+		cout << " 3. Cikis\n";
+		cout << "Seciminiz:\n";
 		cin >> secim;
 
 		switch (secim)
 		{
 		case 1:
-			cout << "Gorev ekleme fonksiyonları."; //push_back atarak görev eklicez vector kütüphanesini dahil edip.
-				break;
-		case 2:
-			cout << "Gorev listeleme fonksiyonu. ";
-				break;
-		case 3: 
-			cout << "Programdan cikis yapiliyor.";
+			gorevEkle();
 			break;
-		
+		case 2:
+			gorevListele();
+			break;
+		case 3:
+			cout << "Programdan cikis yapiliyor.\n";
+			break;
+
 		default:
-			cout << "Yanlis secim yaptınız basa donuluyor."
+			cout << "Yanlis secim yaptiniz. Tekrar deneyiniz.\n";
 
 
 		}
@@ -36,6 +74,7 @@ int main()
 
 	} while (secim != 3);
 
-	return 0;
 
+
+	return 0;
 }
