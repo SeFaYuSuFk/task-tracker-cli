@@ -10,8 +10,9 @@ void gorevEkle()
 {
 	string yeniGorev;
 	cout << "Gorev ismi\n";
-	cin >> yeniGorev;
+	cin.ignore();
 
+	getline(cin, yeniGorev);
 
 	gorevler.push_back(yeniGorev);
 	cout << "Gorev basariyla eklendi.\n";
