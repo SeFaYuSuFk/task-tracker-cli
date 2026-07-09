@@ -6,6 +6,8 @@ using namespace std;
 
 vector <string> gorevler;
 
+vector <bool> durumlar;
+
 void gorevEkle()
 {
 	string yeniGorev;
@@ -15,8 +17,8 @@ void gorevEkle()
 	getline(cin, yeniGorev);
 
 	gorevler.push_back(yeniGorev);
+	durumlar.push_back(false);
 	cout << "Gorev eklendi.\n";
-
 
 
 }
@@ -35,10 +37,28 @@ void gorevListele()
 	{
 		for (int i = 0; i < gorevler.size(); i++)
 		{
-			cout << i + 1 << gorevler[i] << endl;
+
+			string kutucuk;
+
+			if (durumlar[i] == true)
+			{
+				kutucuk = "[X]";
+			}
+
+			else
+			{
+				kutucuk = "[]";
+			}
+
+
+
+			cout << i + 1 << kutucuk << gorevler[i] << endl;
+
+
+
+
 		}
 	}
-
 
 
 }
@@ -59,15 +79,44 @@ void gorevSil()
 
 	if (silinecekNo > 0 && silinecekNo <= gorevler.size())
 	{
-		gorevler.erase(gorevler.begin() + (gorevler.size() - 1));
+		gorevler.erase(gorevler.begin() + (silinecekNo - 1));
+		durumlar.erase(durumlar.begin() + (silinecekNo - 1));
+		cout << "Gorev silindi.\n";
 	}
 
 	else
 		cout << "Yanlis numara girdiniz.\n";
 
-	cout << "Gorev silindi.\n";
+
 
 }
+
+void gorevTamamla()
+{
+	if (gorevler.empty())
+	{
+		cout << "Listede gorev yok.\n";
+		return;
+	}
+
+	gorevListele();
+
+	int secilenNo;
+	cout << "Tamamlanacak gorevin numarasını secin.\n";
+	cin >> secilenNo;
+
+	if (secilenNo > 0 && secilenNo <= gorevler.size())
+	{
+		durumlar[secilenNo - 1] = true;
+		cout << "Gorev tamamlanmis olarak isaretlendi.\n";
+	}
+
+	else
+		cout << "Yanlis numara girdiniz.\n";
+}
+
+
+
 
 
 
@@ -82,7 +131,8 @@ int main()
 		cout << " 1. Gorev Ekle\n";
 		cout << " 2. Gorev Listeleme\n";
 		cout << " 3. Gorev Sil\n";
-		cout << " 4. Cikis.\n";
+		cout << " 4. Gorev Tamamla.\n";
+		cout << " 5. Cikis\n";
 		cout << "Seciminiz:\n";
 		cin >> secim;
 
@@ -98,9 +148,11 @@ int main()
 			gorevSil();
 			break;
 		case 4:
+			gorevTamamla();
+			break;
+		case 5:
 			cout << "Programdan cikis yapiliyor.\n";
 			break;
-
 		default:
 			cout << "Yanlis secim yaptiniz. Tekrar deneyiniz.\n";
 
@@ -108,7 +160,7 @@ int main()
 		}
 
 
-	} while (secim != 4);
+	} while (secim != 5);
 
 
 
