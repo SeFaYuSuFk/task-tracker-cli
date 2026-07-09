@@ -4,41 +4,72 @@
 
 using namespace std;
 
-vector<string> gorevler;
+vector <string> gorevler;
 
 void gorevEkle()
 {
 	string yeniGorev;
-	cout << "Gorev ismi\n";
+	cout << "Gorev ismi:\n";
 	cin.ignore();
 
 	getline(cin, yeniGorev);
 
 	gorevler.push_back(yeniGorev);
-	cout << "Gorev basariyla eklendi.\n";
+	cout << "Gorev eklendi.\n";
+
 
 
 }
 
 void gorevListele()
 {
-	cout << "Gorevlerimiz\n";
+	cout << "==Gorevlerimiz==\n";
 
 	if (gorevler.empty())
 	{
-		cout << "Liste suan bos. Lutfen yeni gorev ekleyin.\n";
+		cout << "Liste suan bos. Lutfen gorev ekleyin.\n";
+		return;
 	}
 
 	else
 	{
 		for (int i = 0; i < gorevler.size(); i++)
 		{
-			cout << i + 1 << " " << gorevler[i] << endl;
+			cout << i + 1 << gorevler[i] << endl;
 		}
 	}
 
 
+
 }
+
+void gorevSil()
+{
+	if (gorevler.empty())
+	{
+		cout << "Listede silinecek gorev yok.\n";
+		return;
+	}
+
+	gorevListele();
+
+	int silinecekNo;
+	cout << "Silmek istediğiniz gorevin numarasini yaziniz.\0";
+	cin >> silinecekNo;
+
+	if (silinecekNo > 0 && silinecekNo <= gorevler.size())
+	{
+		gorevler.erase(gorevler.begin() + (gorevler.size() - 1));
+	}
+
+	else
+		cout << "Yanlis numara girdiniz.\n";
+
+	cout << "Gorev silindi.\n";
+
+}
+
+
 
 
 int main()
@@ -50,7 +81,8 @@ int main()
 		cout << " ==Gorev Takip Programi==\n";
 		cout << " 1. Gorev Ekle\n";
 		cout << " 2. Gorev Listeleme\n";
-		cout << " 3. Cikis\n";
+		cout << " 3. Gorev Sil\n";
+		cout << " 4. Cikis.\n";
 		cout << "Seciminiz:\n";
 		cin >> secim;
 
@@ -63,6 +95,9 @@ int main()
 			gorevListele();
 			break;
 		case 3:
+			gorevSil();
+			break;
+		case 4:
 			cout << "Programdan cikis yapiliyor.\n";
 			break;
 
@@ -73,7 +108,7 @@ int main()
 		}
 
 
-	} while (secim != 3);
+	} while (secim != 4);
 
 
 
