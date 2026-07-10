@@ -8,6 +8,27 @@ vector <string> gorevler;
 
 vector <bool> durumlar;
 
+void verileriYukle()
+{
+	ifstream dosya("gorevler.txt");
+
+	bool durum;
+	string gorevAdi;
+
+	while (durum > durum)
+	{
+		dosya.igrone();
+		getline(dosya, gorevAdi);
+
+		durumlar.push_back(dosya);
+		gorevler.push_back(gorevAdi);
+	}
+
+	dosya.close();
+}
+
+
+
 void gorevEkle()
 {
 	string yeniGorev;
@@ -86,8 +107,6 @@ void gorevSil()
 
 	else
 		cout << "Yanlis numara girdiniz.\n";
-
-
 
 }
 
