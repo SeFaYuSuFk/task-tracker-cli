@@ -1,40 +1,40 @@
-# 📊 C++ Veri Yapıları ve Hafıza Yönetimi
+# 📊 C++ Data Structures and Memory Management
 
-Bu doküman, yazılım projelerinde verilerin nasıl saklanacağına ve yönetileceğine dair temel mimari kararları incelemektedir. İki ana başlık altında veri yapıları (Array vs. Vector) ve depolama birimleri (RAM vs. HDD/SSD) karşılaştırılmıştır.
-
----
-
-## BÖLÜM 1: Veri Boyutlandırma (Array vs. Vector)
-
-Verileri hafızada tutmak için kullanılan bu iki temel yapı arasındaki seçim, projenin veri boyutuna ve esneklik ihtiyacına göre belirlenir.
-
-### 1. Veri Boyutunun Belirliliği
-* **Array (Sabit Dizi):** Boyutu program derlenmeden önce belirlenmek zorundadır ve sonradan asla değiştirilemez. 
-  > *Örnek Senaryo:* "En Büyük Sayıyı Bulma" gibi algoritmik projelerde (örneğin sadece 10 sayının kıyaslanacağı biliniyorsa) Array kullanmak hızlı ve mantıklıdır.
-* **Vector (Dinamik Dizi):** Boyutu değişkendir. İçine veri eklendikçe hafızada otomatik olarak genişler.
-  > *Örnek Senaryo:* "Görev Takip Sistemi" projesinde olduğu gibi, kullanıcının sisteme kaç adet görev gireceğinin önceden bilinemediği durumlarda (dinamik esneklik gerektiğinde) Vector kullanılması zorunludur.
-
-### 2. Bellek Yönetimi ve Performans
-* **Array Performansı:** Hafızada tek bir sabit blok halinde yer ayırır. Çalışma hızı çok yüksektir ancak ihtiyaçtan fazla yer ayrılırsa bellek israfına (Memory Waste) yol açar.
-* **Vector Esnekliği:** Arka planda hafızayı dinamik olarak yönetir. Veri arttıkça kendine yeni alanlar açar. Terabaytlarca verinin işlendiği büyük sistemlerde bu esnek bellek yönetimi hayati önem taşır.
+This document examines the fundamental architectural decisions regarding how data is stored and managed in software projects. Data structures (Array vs. Vector) and storage units (RAM vs. HDD/SSD) are compared under two main headings.
 
 ---
 
-## BÖLÜM 2: Kalıcılık (Bellekte Tutmak vs. Dosyaya Kaydetmek)
+## PART 1: Data Sizing (Array vs. Vector)
 
-Bir programın verileri nerede ve ne kadar süreyle tutacağı, o programın amacını belirleyen en önemli unsurdur. 
+The choice between these two basic structures used to keep data in memory is determined by the project's data size and the need for flexibility.
 
-### 1. Bellekte Veri Tutmak (Geçici Hafıza - RAM)
-Verilerin sadece program çalıştığı süre boyunca **RAM (Random Access Memory)** üzerinde tutulmasıdır.
-* **Çalışma Mantığı:** Konsol açılır, kodlar okunur, RAM'den geçici bir alan tahsis edilir, işlemler yapılır ve çıktı verilir. Konsol (program) kapatıldığı an RAM o alanı temizler ve veriler sonsuza dek silinip gider.
-* **Kullanım Yeri:** Sadece anlık hesaplama gerektiren, geçmişe dönük bir kayıt tutulmasına ihtiyaç duyulmayan küçük çaplı projelerde (Örn: Geçtiğimiz haftalardaki temel algoritma egzersizleri) kullanılır.
+### 1. Certainty of Data Size
+* **Array (Static Array):** Its size must be determined before the program is compiled and can never be changed later. 
+  > *Example Scenario:* In algorithmic projects like "Finding the Largest Number" (e.g., if it is known that only 10 numbers will be compared), using an Array is fast and logical.
+* **Vector (Dynamic Array):** Its size is variable. It automatically expands in memory as data is added into it.
+  > *Example Scenario:* As in the "Task Tracking System" project, using a Vector is mandatory when it is not known in advance how many tasks the user will enter into the system (when dynamic flexibility is required).
 
-### 2. Dosyaya Veri Kaydetmek (Kalıcı Hafıza - File I/O)
-Verilerin bilgisayarın kalıcı depolama birimlerine (**HDD veya SSD**) fiziksel bir dosya (örneğin `.txt`) olarak yazılmasıdır.
-* **Çalışma Mantığı:** Program, verileri sadece RAM'de tutmakla kalmaz, aynı zamanda sabit diske kazır. Program veya bilgisayar kapatılsa bile veriler orada kalır ve istendiği zaman tekrar okunabilir.
-* **Kullanım Yeri:** Kullanıcının geçmiş verilerine tekrar ulaşması gereken projelerde kullanılır. (Örn: Bu hafta geliştirdiğimiz `task-tracker-cli` projesinde her adımın kaydedilip, program tekrar açıldığında geri yüklenmesi gibi).
-
-**Özetle:** Bellek (RAM) anlık düşünme ve işlem yapma alanımızken, Dosya (HDD/SSD) hiçbir şeyi unutmayan defterimizdir.
+### 2. Memory Management and Performance
+* **Array Performance:** It allocates space in memory as a single fixed block. The operating speed is very high, but if more space is allocated than needed, it leads to memory waste.
+* **Vector Flexibility:** It dynamically manages memory in the background. As data increases, it allocates new space for itself. In large systems where terabytes of data are processed, this flexible memory management is of vital importance.
 
 ---
-**Geliştirici:** Sefa Yusuf Kütük
+
+## PART 2: Persistence (Keeping in Memory vs. Saving to File)
+
+Where and for how long a program will keep data is the most important factor determining the purpose of that program. 
+
+### 1. Keeping Data in Memory (Temporary Memory - RAM)
+It is the keeping of data on **RAM (Random Access Memory)** only while the program is running.
+* **Working Logic:** The console opens, codes are read, a temporary space is allocated from RAM, operations are performed, and output is given. The moment the console (program) is closed, RAM clears that space and the data is deleted forever.
+* **Use Case:** Used in small-scale projects that require only instant calculations and do not need historical records (e.g., basic algorithm exercises from previous weeks).
+
+### 2. Saving Data to a File (Persistent Memory - File I/O)
+It is the writing of data to the computer's persistent storage units (**HDD or SSD**) as a physical file (e.g., `.txt`).
+* **Working Logic:** The program not only keeps the data in RAM but also engraves it onto the hard disk. Even if the program or computer is turned off, the data remains there and can be read again whenever desired.
+* **Use Case:** Used in projects where the user needs to access their past data again. (e.g., as in the `task-tracker-cli` project we developed this week, where every step is saved and restored when the program is reopened).
+
+**In Summary:** Memory (RAM) is our space for instant thinking and processing, while the File (HDD/SSD) is our notebook that never forgets anything.
+
+---
+**Developer:** Sefa Yusuf Kütük
