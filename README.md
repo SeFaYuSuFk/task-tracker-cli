@@ -1,29 +1,29 @@
-# 📝 Task Tracker CLI (Görev Takip Sistemi)
+# 📝 Task Tracker CLI
 
-Bu proje, C++ ile geliştirilmiş terminal tabanlı dinamik bir Görev Takip (To-Do List) uygulamasıdır. Kullanıcıların günlük görevlerini eklemelerine, silmelerine, `[X]` veya `[ ]` formatında durumlarını güncellemelerine ve bu verileri bilgisayarın arka planında kalıcı olarak saklamalarına olanak tanır. 
+This project is a terminal-based, dynamic Task Tracking (To-Do List) application developed in C++. It allows users to add and delete their daily tasks, update their status in a `[X]` or `[ ]` format, and store this data persistently in the background of their computer.
 
-Proje süreci, versiyon kontrol sistemleri (Git/GitHub) kullanılarak yaklaşık 10 commit adımıyla tamamlanmıştır.
+The project process was completed in approximately 10 commit steps using version control systems (Git/GitHub).
 
-## 🚀 Temel Özellikler ve Algoritma Mantığı
+## 🚀 Key Features and Algorithm Logic
 
-Uygulamanın ana akışı bir `switch-case` menü yapısı üzerinden kontrol edilir. Her bir özellik, C++'ın bellek ve veri yönetim kurallarına uygun olarak tasarlanmıştır:
+The main flow of the application is controlled via a `switch-case` menu structure. Each feature is designed in accordance with C++ memory and data management rules:
 
-- **Görev Ekleme:** Kullanıcıdan alınan görevler `std::vector` içine eklenir. Birden fazla kelime içeren görevlerin (örn: "C++ tekrarı yap") kelime kaybı yaşamadan alınabilmesi için standart `cin` yerine **`getline()`** fonksiyonu kullanılmıştır.
-- **Görev Listeleme:** Algoritma öncelikle listenin boş olup olmadığını kontrol eder. Eğer liste boşsa kullanıcıya bilgi verir; doluysa, paralel çalışan "durumlar" vektörünü kontrol ederek görevleri `[X]` (Tamamlandı) veya `[ ]` (Yapılmadı) kutucuklarıyla ekrana basar.
-- **Görev Silme:** Hafızadan veri silme işlemi (`.erase()`) basit bir rakam değil, makine dilinin anlayacağı "fiziksel bir koordinat" ister. Bu yapı bir **tren vagonuna** benzetilebilir. `begin()` fonksiyonu ile trenin başına gidilmiş ve `0` tabanlı indeks mantığıyla istenen vagon (görev) raydan çıkarılarak tamamen silinmiştir.
-- **Görev Tamamlama:** Silme işleminin aksine, burada fiziksel bir vagonu yok etmek yerine doğrudan o vagonun içindeki veriyi değiştirmek hedeflenmiştir. Bu nedenle iteratör (koordinat) kullanılmamış, `(secilenNo - 1)` formülüyle doğrudan indekse ulaşılarak durum güncellenmiştir.
-- **Kalıcı Hafıza (File I/O):** Eklenen verilerin konsol kapandığında kaybolmaması için `<fstream>` kütüphanesi entegre edilmiştir. `ofstream` ile veriler `.txt` dosyasına yazılırken, `ifstream` ile program her açıldığında bu veriler otomatik olarak geri yüklenir.
+- **Add Task:** Tasks received from the user are added into a `std::vector`. To ensure tasks containing multiple words (e.g., "Review C++ topics") are captured without losing data, the **`getline()`** function was used instead of the standard `cin`.
+- **List Tasks:** The algorithm first checks whether the list is empty. If it is, it informs the user. If not, it checks the parallel "status" vector and prints the tasks to the screen along with `[X]` (Completed) or `[ ]` (Pending) checkboxes.
+- **Delete Task:** Deleting data from memory (`.erase()`) requires a "physical coordinate" that machine language can understand, rather than a simple number. This structure can be likened to a **train car**. Using the `begin()` function, the algorithm goes to the front of the train, and using a `0`-based index logic, the desired car (task) is derailed and completely deleted.
+- **Complete Task:** Unlike the deletion process, the goal here is not to destroy a physical car but to directly change the data inside it. Therefore, an iterator (coordinate) was not used; instead, the status was updated by accessing the index directly using the `(secilenNo - 1)` formula.
+- **Persistent Memory (File I/O):** The `<fstream>` library was integrated to ensure that the added data is not lost when the console is closed. While `ofstream` writes the data to a `.txt` file, `ifstream` automatically restores this data every time the program is opened.
 
-## 🛠️ Kullanılan Teknolojiler ve Veri Yapıları
+## 🛠️ Technologies and Data Structures Used
 
-- **Dil:** C++
-- **Kütüphaneler:** `<iostream>`, `<string>`, `<vector>`, `<fstream>`
-- **Veri Yapısı (`vector`):** Projede sabit diziler (Array) yerine dinamik vektörler kullanılmıştır. Vektörler, içine ne kadar veri atılırsa o kadar esneyen bir **"elma torbası"** prensibiyle çalışır. Ancak tür güvenliği (Type Safety) gereği, string tanımlanmış bir torbaya sadece metin verisi girilebilir.
+- **Language:** C++
+- **Libraries:** `<iostream>`, `<string>`, `<vector>`, `<fstream>`
+- **Data Structure (`vector`):** Dynamic vectors were used in the project instead of static arrays. Vectors operate on the principle of an **"apple bag"** that stretches as more data is thrown into it. However, due to Type Safety, only text data can be inserted into a bag defined as a string.
 
-## 👨‍💻 Geliştirici Notları
+## 👨‍💻 Developer Notes
 
-Bu proje; C++ bellek yönetimi, dinamik diziler ve dosya işlemleri (File I/O) konularında ciddi bir öğrenme ve pekiştirme süreci olmuştur. `ifstream` / `ofstream` kalıplarıyla bilgisayarın diskine doğrudan müdahale etmek ve iteratör kavramını kavramak zorlayıcı ama bir o kadar da vizyon katıcıydı. 
+This project has been a serious learning and reinforcement process in C++ memory management, dynamic arrays, and file operations (File I/O). Intervening directly with the computer's disk using `ifstream` / `ofstream` patterns and grasping the iterator concept was challenging but equally visionary.
 
-Önümüzdeki hafta, bu projeden elde edilen tecrübelerle benzer algoritmaları daha da derinleştirecek yeni projelere yelken açılacak. YOLA DEVAM...
+Next week, with the experience gained from this project, I will set sail for new projects that will further deepen similar algorithms. KEEP MOVING FORWARD...
 
-**Geliştirici:** Sefa Yusuf Kütük
+**Developer:** Sefa Yusuf Kütük
