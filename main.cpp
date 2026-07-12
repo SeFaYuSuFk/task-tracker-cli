@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <fstream>
 
 using namespace std;
 
@@ -10,21 +11,35 @@ vector <bool> durumlar;
 
 void verileriYukle()
 {
-	ifstream dosya("gorevler.txt");
+	ifstream dosya("C:\\Kullanıcılar\\sefay\\gorevler.txt");
 
-	bool durum;
+	bool durum = false;
 	string gorevAdi;
 
-	while (durum > durum)
+	while (dosya >> durum)
 	{
-		dosya.igrone();
+		dosya.ignore();
 		getline(dosya, gorevAdi);
 
-		durumlar.push_back(dosya);
+		durumlar.push_back(durum);
 		gorevler.push_back(gorevAdi);
 	}
 
 	dosya.close();
+}
+
+void verileriKaydet()
+{
+	ofstream dosya("C:\\Kullanıcılar\\sefay\\gorevler.txt");
+
+	for (int i = 0; i < gorevler.size(); i++)
+	{
+		dosya << durumlar[i] << gorevler[i] << endl;
+	}
+
+
+	dosya.close();
+
 }
 
 
@@ -121,7 +136,7 @@ void gorevTamamla()
 	gorevListele();
 
 	int secilenNo;
-	cout << "Tamamlanacak gorevin numarasını secin.\n";
+	cout << "Tamamlanacak gorevin numarasini secin.\n";
 	cin >> secilenNo;
 
 	if (secilenNo > 0 && secilenNo <= gorevler.size())
@@ -170,7 +185,8 @@ int main()
 			gorevTamamla();
 			break;
 		case 5:
-			cout << "Programdan cikis yapiliyor.\n";
+			verileriKaydet();
+			cout << "Veriler kaydedildi. Programdan cikis yapiliyor.\n";
 			break;
 		default:
 			cout << "Yanlis secim yaptiniz. Tekrar deneyiniz.\n";
